@@ -2,16 +2,16 @@
 package iterator;
 
 
-public class ListaOrdenada <T extends Comparable <T> > {
+public class ListaOrdenada <T extends Comparable > implements Iterable {
    
 //atributos
      Nodo <T> cabeza;
-     int cont=0;
+     int cont;
      
 //constructor
      public ListaOrdenada(){
          cabeza=new Nodo();
-         
+         cont=0;
      }
      
      public void inserta(T elem){
@@ -29,7 +29,7 @@ public class ListaOrdenada <T extends Comparable <T> > {
          cont++;
      }
      
-     private Nodo<T> buscar(T elem){
+     private Nodo<T> buscar(T elem) throws Unchecked{
          Nodo<T> nuevo=new Nodo<T>(elem);
          Nodo<T> actual=cabeza;
          
@@ -37,7 +37,7 @@ public class ListaOrdenada <T extends Comparable <T> > {
              actual=actual.getSiguiente();
                    
          if(actual.getSiguiente()==null)
-             throw new Unchecked("No existe elemento");
+             new Unchecked("No existe elemento");
          return nuevo;
                  
      }
@@ -58,14 +58,23 @@ public class ListaOrdenada <T extends Comparable <T> > {
          siguiente.setAtras(pasado);
                  
      }
-     public void imprimeLista(Nodo<T> actual){
-      if(actual!=null){
-          System.out.print(actual.getElemento());
-          imprimeLista(actual.getSiguiente());
-      }
-  }
+    
+    public void imprimeLista(){
+        Nodo<T> temp=cabeza.getSiguiente();
+        System.out.println(""+"     cabeza"+"↓");
+        while(temp!=null){
+            System.out.print(""+temp.toString());
+            System.out.print("↓"+"\n");
+            temp=temp.getSiguiente();
+        }
+        System.out.println(""+"        null");
+    }
+
      
-     
+    
+    public Iterator Iterator() {
+        return new MiIterator(cabeza);
+    } 
      public static void main(String args[]){
          ListaOrdenada<Integer> lista=new ListaOrdenada<Integer>();
          
@@ -73,13 +82,18 @@ public class ListaOrdenada <T extends Comparable <T> > {
          lista.inserta(5);
          lista.inserta(3);
          lista.inserta(6);
-         lista.imprimeLista(null);
+         System.out.println(lista.busca(0));
+         lista.imprimeLista();
          
+         lista.Iterator();
          
-         
+                 
      }
 
+    @Override
+    public java.util.Iterator iterator() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
    
-      
-    
 }

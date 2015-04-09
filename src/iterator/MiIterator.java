@@ -1,22 +1,43 @@
 
 package iterator;
 
-public class MiIterator implements Iterator {
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
-    @Override
+public class MiIterator <T> implements Iterator {
+
+ //atributos
+    private ArrayList<T> datos;
+    private int pos;
+ //constructor
+    public MiIterator(Nodo<T> actual){
+        datos=new ArrayList();
+        actual=actual.getSiguiente();
+        while(actual!=null){
+            datos.add(actual.getElemento());
+            actual=actual.getSiguiente();
+        }
+        pos=0;
+              
+    }
+    
+    
+    //si tiene elementos
     public boolean hasNext() {
-        boolean resp=false;
-        if()
+        return pos<datos.size();
     }
 
-    @Override
-    public Object next() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      
+    public T next() {
+        T resp;
+        if(!hasNext())
+            throw new NoSuchElementException();
+         resp=datos.get(pos);
+         pos++;
+         return resp;
+        
     }
 
-    @Override
-    public void remove() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
     
 }
