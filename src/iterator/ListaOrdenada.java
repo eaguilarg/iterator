@@ -7,7 +7,6 @@ public class ListaOrdenada <T extends Comparable > implements Iterable {
 //atributos
      Nodo <T> cabeza;
      int cont;
-     
 //constructor
      public ListaOrdenada(){
          cabeza=new Nodo();
@@ -39,13 +38,11 @@ public class ListaOrdenada <T extends Comparable > implements Iterable {
          if(actual.getSiguiente()==null)
              new Unchecked("No existe elemento");
          return nuevo;
-                 
-     }
+        }
      public T busca(T elem){
          Nodo<T> temp=buscar(elem);
          return temp.getElemento();
-         
-     }
+       }
      public void borrar(T elem){
          Nodo<T> siguiente, pasado;
          Nodo<T> busca;
@@ -53,11 +50,9 @@ public class ListaOrdenada <T extends Comparable > implements Iterable {
          
          siguiente=busca.getSiguiente();
          pasado=busca.getAtras();
-         
          pasado.setSiguiente(siguiente);
          siguiente.setAtras(pasado);
-                 
-     }
+       }
     
     public void imprimeLista(){
         Nodo<T> temp=cabeza.getSiguiente();
@@ -70,9 +65,7 @@ public class ListaOrdenada <T extends Comparable > implements Iterable {
         System.out.println(""+"        null");
     }
 
-     
-    
-    public Iterator Iterator() {
+     public Iterator Iterator() {
         return new MiIterator(cabeza);
     } 
      public static void main(String args[]){
